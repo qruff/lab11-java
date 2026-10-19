@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.streaming</groupId>
+    <artifactId>streaming-catalog</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Streaming Catalog</name>
+    <description>ЛР9. Каталог стримингового сервиса с рекомендациями на паттернах проектирования</description>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <exec.mainClass>com.streaming.Main</exec.mainClass>
+    </properties>
+
+    <build>
+        <finalName>streaming-catalog</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <!-- Позволяет запускать демо: mvn -q compile exec:java -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>com.streaming.Main</mainClass>
+                </configuration>
+            </plugin>
+            <!-- Собирает исполняемый jar с Main-Class в манифесте -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.streaming.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+    <groupId>de.elnarion.maven</groupId>
+    <artifactId>plantuml-generator-maven-plugin</artifactId>
+    <version>3.0.1</version>
+    <executions>
+        <execution>
+            <id>generate-class-diagram</id>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+            <phase>process-classes</phase>
+            <configuration>
+                <outputFilename>class-diagram.puml</outputFilename>
+                <scanPackages>
+                    <scanPackage>com.streaming</scanPackage>
+                </scanPackages>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+        </plugins>
+    </build>
+</project>
